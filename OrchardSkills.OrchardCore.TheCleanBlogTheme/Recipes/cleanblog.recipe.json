@@ -11,6 +11,7 @@
 
   // The variables are evaluated the first time they are accessed, and reused across steps
   "variables": {
+    "homeContentItemId": "[js:uuid()]",
     "blogContentItemId": "[js:uuid()]",
     "menuContentItemId": "[js:uuid()]"
     // "now": "[js: new Date().toISOString()]"
@@ -26,6 +27,7 @@
         "OrchardCore.Admin",
         "OrchardCore.Diagnostics",
         "OrchardCore.DynamicCache",
+        "OrchardCore.Email",
         "OrchardCore.Features",
         "OrchardCore.Navigation",
         "OrchardCore.Recipes",
@@ -50,6 +52,7 @@
         "OrchardCore.Deployment.Remote",
         "OrchardCore.Feeds",
         "OrchardCore.Flows",
+        "OrchardCore.Forms",
         "OrchardCore.Indexing",
         "OrchardCore.Layers",
         "OrchardCore.Lucene",
@@ -62,6 +65,8 @@
         "OrchardCore.Title",
         "OrchardCore.Templates",
         "OrchardCore.Widgets",
+        "OrchardCore.Workflows",
+        "OrchardCore.Workflows.Http",
 
         // Themes
         "TheCleanBlogTheme",
@@ -825,8 +830,32 @@
                 "ContentType": "LinkMenuItem",
                 "ContentItemId": "[js: uuid()]",
                 "LinkMenuItemPart": {
+                  "Name": "Blog",
+                  "Url": "~/blog"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
                   "Name": "About",
                   "Url": "~/about"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "Contact",
+                  "Url": "~/contact"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "Search",
+                  "Url": "~/search"
                 }
               }
             ]
@@ -894,6 +923,30 @@
         {
           "ContentItemId": "[js: uuid()]",
           "ContentType": "Article",
+          "DisplayText": "Home",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "AutoroutePart": {
+            "Path": "home",
+            "SetHomepage": true
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>This is the home page</p></p>"
+          },
+          "TitlePart": {
+            "Title": "Home"
+          },
+          "Article": {
+            "Subtitle": {
+              "Text": "Welcome"
+            }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
           "DisplayText": "About",
           "Latest": true,
           "Published": true,
@@ -913,6 +966,203 @@
             "Subtitle": {
               "Text": "This is what I do."
             }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
+          "DisplayText": "Thanks",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "AutoroutePart": {
+            "Path": "thanks",
+            "SetHomepage": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>Thank you for your message. Someone will get back with you as soon as possible.</p>"
+          },
+          "TitlePart": {
+            "Title": "Thanks"
+          },
+          "Article": {
+            "Subtitle": {
+              "Text": "Thank You for your Message"
+            }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Page",
+          "DisplayText": "Contact",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Page": {},
+          "AutoroutePart": {
+            "Path": "contact",
+            "SetHomepage": false
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "4xrapxrd65572r3hrqsyzpqr41",
+                "ContentItemVersionId": null,
+                "ContentType": "Form",
+                "DisplayText": "Contact",
+                "Latest": false,
+                "Published": false,
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "TitlePart": {
+                  "Title": "Contact"
+                },
+                "FormPart": {
+                  "Action": "/workflows/Invoke?token=CfDJ8J9X5AJrfSFEg_y2herzL9treOg0l1xGW5AbPXEVnQILZxcfB7HLcWA8hPWv79cYxceFV3RXwPyo4XiarTdobhjPAXg65suEdfjD3bGXLQXph-ACWNVHDncMesMoJxr6MKttRFk8636cBBq7LRJQy3UYfmrlx0jV-EQnBrtcgAkQPZxK6ygsX6MbifonWoz054NbfeUMQ663f85zh2gpl5MhcbPjqkhPRmNpaEfIb52g",
+                  "Method": "POST",
+                  "WorkflowTypeId": null
+                },
+                "FlowPart": {
+                  "Widgets": [
+                    {
+                      "ContentItemId": "4v2zn39myvc9v7knjjygez48db",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Input",
+                      "DisplayText": "Name",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Name"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "InputPart": {
+                        "Type": "text",
+                        "DefaultValue": null,
+                        "Placeholder": "Enter Name"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "47q0d4cgpw4p2xrrsh0cggepd2",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Input",
+                      "DisplayText": "Email",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Email"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "InputPart": {
+                        "Type": "email",
+                        "DefaultValue": null,
+                        "Placeholder": "Enter Email"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "40tahbx1b3n5ar3tvwmnn5nw5s",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Input",
+                      "DisplayText": "Message",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Message"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "InputPart": {
+                        "Type": "text",
+                        "DefaultValue": null,
+                        "Placeholder": "Enter Message Text"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "4d1g2zxrm80z25jjs0rzyvkyxv",
+                      "ContentItemVersionId": null,
+                      "ContentType": "ValidationSummary",
+                      "DisplayText": null,
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "ValidationSummaryPart": {},
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "4nh88g8ddndgz3779jsv6mgbnm",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Button",
+                      "DisplayText": "Submit",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Submit"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "ButtonPart": {
+                        "Text": "Submit",
+                        "Type": "submit"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": 3,
+                  "Size": 100
+                }
+              }
+            ]
+          },
+          "TitlePart": {
+            "Title": "Contact"
           }
         },
         {
@@ -1116,6 +1366,294 @@
           ]
         }
       ]
+    },
+    {
+      "name": "WorkflowType",
+      "data": [
+        {
+          "WorkflowTypeId": "4jj8jr3wyat5h7f8s4dvn052db",
+          "Name": "Contact",
+          "IsEnabled": true,
+          "IsSingleton": false,
+          "DeleteFinishedWorkflows": false,
+          "Activities": [
+            {
+              "ActivityId": "490rajejvg37c4wd8m50q06mxv",
+              "Name": "HttpRequestEvent",
+              "X": 0,
+              "Y": 0,
+              "IsStart": true,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Contact Form Submitted"
+                },
+                "HttpMethod": "POST",
+                "Url": "/workflows/Invoke?token=CfDJ8J9X5AJrfSFEg_y2herzL9treOg0l1xGW5AbPXEVnQILZxcfB7HLcWA8hPWv79cYxceFV3RXwPyo4XiarTdobhjPAXg65suEdfjD3bGXLQXph-ACWNVHDncMesMoJxr6MKttRFk8636cBBq7LRJQy3UYfmrlx0jV-EQnBrtcgAkQPZxK6ygsX6MbifonWoz054NbfeUMQ663f85zh2gpl5MhcbPjqkhPRmNpaEfIb52g",
+                "ValidateAntiforgeryToken": true,
+                "TokenLifeSpan": 0
+              }
+            },
+            {
+              "ActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
+              "Name": "BindModelStateTask",
+              "X": 0,
+              "Y": 190,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": null
+                }
+              }
+            },
+            {
+              "ActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "Name": "ForkTask",
+              "X": 340,
+              "Y": 20,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Validate Form Fields"
+                },
+                "Forks": [
+                  "Validate Name",
+                  "Validate Email",
+                  "Validate Message"
+                ]
+              }
+            },
+            {
+              "ActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+              "Name": "ValidateFormFieldTask",
+              "X": 320,
+              "Y": 190,
+              "IsStart": false,
+              "Properties": {
+                "FieldName": "Name",
+                "ErrorMessage": "No Name entered",
+                "ActivityMetadata": {
+                  "Title": "Validate Name"
+                }
+              }
+            },
+            {
+              "ActivityId": "4xp021fs701ay5gmram0nyjcdh",
+              "Name": "ValidateFormFieldTask",
+              "X": 760,
+              "Y": 170,
+              "IsStart": false,
+              "Properties": {
+                "FieldName": "Email",
+                "ErrorMessage": "Email not valid",
+                "ActivityMetadata": {
+                  "Title": "Validate Email"
+                }
+              }
+            },
+            {
+              "ActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+              "Name": "ValidateFormFieldTask",
+              "X": 1150,
+              "Y": 200,
+              "IsStart": false,
+              "Properties": {
+                "FieldName": "Message",
+                "ErrorMessage": "No Message entered",
+                "ActivityMetadata": {
+                  "Title": "Validate Message"
+                }
+              }
+            },
+            {
+              "ActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
+              "Name": "JoinTask",
+              "X": 440,
+              "Y": 300,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": null
+                },
+                "Mode": 0
+              }
+            },
+            {
+              "ActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "Name": "ValidateFormTask",
+              "X": 500,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": null
+                }
+              }
+            },
+            {
+              "ActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+              "Name": "EmailTask",
+              "X": 810,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "Sender": {
+                  "Expression": "sales@orchardskills.com"
+                },
+                "Recipients": {
+                  "Expression": "sales@orchardskills.com"
+                },
+                "Subject": {
+                  "Expression": "New Message"
+                },
+                "Body": {
+                  "Expression": "<p>The following information was submitted:<p/>\r\n<p>Name: {{ Request.Form.Name }}</p>\r\n<p>Email: {{ Request.Form.Email }}</p>\r\n<p>Message: {{ Request.Form.Message }}</p>"
+                },
+                "IsBodyHtml": true,
+                "ActivityMetadata": {
+                  "Title": "Email to Site Admin"
+                }
+              }
+            },
+            {
+              "ActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv",
+              "Name": "HttpRedirectTask",
+              "X": 190,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Display Form Errors"
+                },
+                "Location": {
+                  "Expression": "/contact"
+                },
+                "Permanent": false
+              }
+            },
+            {
+              "ActivityId": "4kbg33s0s6v491sp4k2dpeymn2",
+              "Name": "HttpRedirectTask",
+              "X": 1090,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Display Thank You Page"
+                },
+                "Location": {
+                  "Expression": "/thanks"
+                },
+                "Permanent": false
+              }
+            }
+          ],
+          "Transitions": [
+            {
+              "Id": 0,
+              "SourceActivityId": "490rajejvg37c4wd8m50q06mxv",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "4hr22mvxwk0rex8khhkr9cnncp"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "SourceOutcomeName": "Validate Name",
+              "DestinationActivityId": "4655jbn3247ksrt08a2b7r8yw9"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+              "SourceOutcomeName": "Invalid",
+              "DestinationActivityId": "4655jbn3247ksrt08a2b7r8yw9"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
+              "SourceOutcomeName": "Joined",
+              "DestinationActivityId": "4crzwchrbc2fkym4jbg7aed44j"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "SourceOutcomeName": "Valid",
+              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "SourceOutcomeName": "Invalid",
+              "DestinationActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "4kbg33s0s6v491sp4k2dpeymn2"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4xp021fs701ay5gmram0nyjcdh",
+              "SourceOutcomeName": "Valid",
+              "DestinationActivityId": "4xp021fs701ay5gmram0nyjcdh"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4xp021fs701ay5gmram0nyjcdh",
+              "SourceOutcomeName": "Invalid",
+              "DestinationActivityId": "4xp021fs701ay5gmram0nyjcdh"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+              "SourceOutcomeName": "Valid",
+              "DestinationActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "SourceOutcomeName": "Validate Email",
+              "DestinationActivityId": "4xp021fs701ay5gmram0nyjcdh"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "SourceOutcomeName": "Validate Message",
+              "DestinationActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4xp021fs701ay5gmram0nyjcdh",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+              "SourceOutcomeName": "Invalid",
+              "DestinationActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            }
+          ]
+        }
+      ]
     }
+
   ]
 }
