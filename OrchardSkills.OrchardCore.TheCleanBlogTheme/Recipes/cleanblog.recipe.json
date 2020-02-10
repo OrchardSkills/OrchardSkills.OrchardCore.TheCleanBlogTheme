@@ -88,7 +88,11 @@
         "ContentItemId": "[js: variables('blogContentItemId')]"
       },
       "LayerSettings": {
-        "Zones": [ "Content", "Footer" ]
+        "Zones": [
+          "Header",
+          "Content",
+          "Footer"
+        ]
       }
     },
     {
