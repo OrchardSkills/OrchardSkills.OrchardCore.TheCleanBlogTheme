@@ -1314,7 +1314,7 @@
             "SetHomepage": true
           },
           "HtmlBodyPart": {
-            "Html": ""
+            "Html": "<p class=\"text-center\"><a href=\"/TheCleanBlogTheme/Payment/Index\" class=\"btn btn-primary btn-lg\" role=\"button\" aria-disabled=\"true\">Buy</a></p>"
           },
           "TitlePart": {
             "Title": "Home"
