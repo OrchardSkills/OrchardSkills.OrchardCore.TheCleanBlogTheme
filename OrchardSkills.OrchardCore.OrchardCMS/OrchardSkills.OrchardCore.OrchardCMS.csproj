@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.0.0-rc1-11886" />
-    <PackageReference Include="OrchardCore.Logging.NLog" Version="1.0.0-rc1-11886" />
+    <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.0.0-rc2-13493" />
+    <PackageReference Include="OrchardCore.Logging.NLog" Version="1.0.0-rc2-13493" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OrchardSkills.OrchardCore.TheCleanBlogTheme\TheCleanBlogTheme.csproj" />
